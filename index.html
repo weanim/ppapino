@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6b54b8">
+  <title>Feelings Adventure | The Emotion Explorers</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
+    :root {
+      --purple:#7159bd; --deep:#493887; --pink:#ff91bb; --yellow:#ffd66e;
+      --blue:#83d7f4; --mint:#9ce7ce; --ink:#342b55; --cream:#fffaf2;
+      --soft:#f4efff; --shadow:0 12px 35px rgba(70,48,130,.13);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Nunito',sans-serif;color:var(--ink);background:#fffaf6;
+      background-image:radial-gradient(#e8dfff 1.1px,transparent 1.1px);background-size:22px 22px}
+    button,a{font:inherit}
+    a{text-decoration:none;color:inherit}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(255,250,246,.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid #eee6ff}
+    .nav{max-width:1180px;margin:auto;padding:12px 22px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:9px;font-family:'Baloo 2';font-weight:800;font-size:1.25rem;color:var(--deep);white-space:nowrap}
+    .brand-mark{width:39px;height:39px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#ffd66e,#ff9dc7);font-size:22px}
+    .navlinks{display:flex;align-items:center;gap:17px;font-size:.9rem;font-weight:800;color:#655b84}
+    .navlinks a:hover{color:#e36fa5}
+    .nav-actions{display:flex;align-items:center;gap:8px}
+    .music-btn,.menu-btn{border:0;border-radius:999px;padding:10px 13px;background:#eee8ff;color:var(--deep);font-weight:900;cursor:pointer}
+    .menu-btn{display:none}
+    .hero{max-width:1180px;margin:24px auto 0;padding:0 22px}
+    .hero-card{position:relative;overflow:hidden;border-radius:34px;min-height:430px;display:grid;grid-template-columns:1.05fr .95fr;
+      background:linear-gradient(120deg,#c9eaff 0%,#f9d8ed 50%,#fff0c6 100%);box-shadow:var(--shadow)}
+    .hero-copy{position:relative;z-index:2;padding:54px 18px 48px 55px;align-self:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;background:#ffffffc9;border-radius:999px;color:#7654ae;font-size:.78rem;font-weight:900;letter-spacing:.08em}
+    h1,h2,h3{font-family:'Baloo 2',cursive;margin:0;line-height:1.08}
+    h1{font-size:clamp(2.8rem,5vw,4.9rem);color:#493887;margin:15px 0 10px}
+    h1 span{color:#ec78a9}
+    .hero-copy p{font-size:1.1rem;line-height:1.7;max-width:490px;color:#51486f;font-weight:700}
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 21px;border:0;border-radius:999px;font-weight:900;cursor:pointer;transition:.2s;box-shadow:0 5px 0 rgba(52,43,85,.12)}
+    .btn:hover{transform:translateY(-3px)}
+    .btn-primary{background:var(--purple);color:white}
+    .btn-secondary{background:white;color:var(--deep)}
+    .hero-art{min-height:430px;background:url('assets/welcome-art.jpg') center/cover no-repeat;position:relative}
+    .hero-art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f4dff0 0%,transparent 42%)}
+    .floating-star{position:absolute;font-size:30px;animation:float 3s ease-in-out infinite}
+    .star-a{top:24px;right:35px}.star-b{bottom:35px;left:16px;animation-delay:1s}
+    @keyframes float{50%{transform:translateY(-12px) rotate(12deg)}}
+    .section{max-width:1180px;margin:0 auto;padding:76px 22px 0;scroll-margin-top:85px}
+    .section-heading{text-align:center;margin-bottom:28px}
+    .kicker{color:#d66e9c;font-size:.78rem;font-weight:1000;letter-spacing:.14em;text-transform:uppercase}
+    h2{font-size:clamp(2rem,4vw,3rem);color:var(--deep);margin:7px 0}
+    .section-heading p{max-width:650px;margin:8px auto;color:#716987;line-height:1.6;font-weight:700}
+    .year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .year-card{border-radius:25px;padding:24px;background:white;box-shadow:var(--shadow);border:2px solid transparent;transition:.2s}
+    .year-card:hover{transform:translateY(-5px);border-color:#d9caff}
+    .year-icon{width:62px;height:62px;border-radius:21px;display:grid;place-items:center;font-size:32px;margin-bottom:13px}
+    .y1 .year-icon{background:#fff0bd}.y2 .year-icon{background:#dff6ff}.y3 .year-icon{background:#ffe2ef}
+    .year-card h3{font-size:1.55rem;color:var(--deep)}
+    .year-card p{color:#746d89;line-height:1.55;font-size:.95rem}
+    .pill{display:inline-block;border-radius:999px;padding:6px 11px;font-size:.76rem;font-weight:900;background:#f1ebff;color:#6d55b5;margin:3px 3px 0 0}
+    .mini-link{display:inline-block;margin-top:13px;font-weight:1000;color:#d36b9b}
+    .adventure-panel{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:center;background:linear-gradient(130deg,#e8e1ff,#e1f7ff);border-radius:30px;padding:22px;box-shadow:var(--shadow)}
+    .friends-art{min-height:260px;border-radius:22px;background:url('assets/adventure-friends.jpg') center/cover no-repeat}
+    .adventure-text{padding:15px 22px}
+    .adventure-text h3{font-size:2rem;color:var(--deep);margin:8px 0}
+    .adventure-text p{line-height:1.7;color:#625a7c;font-weight:700}
+    .content-card{background:white;border-radius:28px;padding:25px;box-shadow:var(--shadow);margin-top:20px}
+    .content-card h3{font-size:1.55rem;color:var(--deep);margin-bottom:8px}
+    .content-card p{color:#716987;line-height:1.6}
+    .embed-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .embed-box{border:2px dashed #cdbef6;border-radius:20px;background:#fbf9ff;padding:16px;min-height:220px}
+    .embed-box h4{font-family:'Baloo 2';font-size:1.2rem;margin:0 0 8px;color:#604a9f}
+    .embed-placeholder{min-height:145px;border-radius:14px;background:linear-gradient(135deg,#f2edff,#e7f8ff);display:grid;place-items:center;text-align:center;padding:18px;color:#776c9b;font-weight:800}
+    .embed-placeholder code{display:block;font-size:.75rem;white-space:normal;color:#9b5d88;margin-top:8px}
+    .year-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}
+    .tab{border:0;border-radius:999px;padding:10px 18px;background:#eee9fb;color:#62538e;font-weight:1000;cursor:pointer}
+    .tab.active{background:var(--purple);color:white}
+    .learning-panel{display:none}.learning-panel.active{display:block}
+    .vocab-list{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+    .vocab{padding:9px 15px;border-radius:14px;background:#fff3d6;color:#72552b;font-weight:900}
+    .flow-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .flow-step{background:white;border-radius:19px;padding:17px 12px;text-align:center;box-shadow:var(--shadow)}
+    .flow-step b{display:block;font-family:'Baloo 2';color:var(--deep);font-size:1.02rem;margin:7px 0}
+    .flow-step span{font-size:1.7rem}
+    .flow-step small{color:#786f8d;line-height:1.4;font-weight:700}
+    .treasure{background:linear-gradient(120deg,#fff0c7,#ffe1ef,#e5e0ff);border-radius:30px;padding:28px;text-align:center;box-shadow:var(--shadow)}
+    .treasure .big{font-size:3rem}
+    .footer{margin-top:75px;background:#493887;color:#fff;padding:35px 22px;text-align:center}
+    .footer p{opacity:.8;margin:8px 0}
+    .buddy-launch{position:fixed;right:22px;bottom:22px;z-index:40;border:0;border-radius:999px;background:linear-gradient(135deg,#ff91bb,#8a70d4);color:white;padding:13px 18px;font-weight:1000;box-shadow:0 9px 25px #59408a55;cursor:pointer}
+    .buddy-window{display:none;position:fixed;right:22px;bottom:88px;width:min(360px,calc(100vw - 30px));height:470px;z-index:41;background:white;border-radius:24px;box-shadow:0 18px 55px #30205044;overflow:hidden;border:1px solid #e7ddff}
+    .buddy-window.open{display:flex;flex-direction:column}
+    .buddy-head{background:linear-gradient(120deg,#7058bb,#a17be0);color:white;padding:16px;display:flex;align-items:center;justify-content:space-between}
+    .buddy-head strong{font-family:'Baloo 2';font-size:1.25rem}
+    .close-buddy{border:0;background:#ffffff33;color:white;border-radius:50%;width:30px;height:30px;font-size:18px;cursor:pointer}
+    .chat-messages{flex:1;overflow:auto;padding:15px;background:#fbf9ff}
+    .bubble{max-width:90%;padding:11px 13px;border-radius:16px;margin:0 0 10px;line-height:1.45;font-size:.92rem;font-weight:700}
+    .bot{background:#eee8ff;color:#51437f;border-bottom-left-radius:5px}
+    .user{background:#dff6ff;color:#31566a;margin-left:auto;border-bottom-right-radius:5px}
+    .chat-form{display:flex;gap:7px;padding:11px;border-top:1px solid #eee8fa}
+    .chat-form input{min-width:0;flex:1;border:1px solid #ded5f4;border-radius:999px;padding:11px 13px;font:inherit;outline:none}
+    .chat-form button{border:0;border-radius:50%;width:42px;background:var(--purple);color:white;font-weight:1000;cursor:pointer}
+    .note{font-size:.82rem;color:#8a829d;text-align:center;padding:0 12px 10px}
+    .music-hint{font-size:.78rem;color:#8a829d;margin-top:8px}
+    @media(max-width:850px){
+      .navlinks{display:none;position:absolute;top:64px;left:12px;right:12px;background:white;padding:18px;border-radius:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}
+      .navlinks.show{display:flex}.menu-btn{display:inline-block}
+      .hero-card{grid-template-columns:1fr}.hero-copy{padding:38px 28px 15px}.hero-art{min-height:260px}
+      .hero-art:after{background:linear-gradient(180deg,#f4dff0 0%,transparent 45%)}
+      .year-grid{grid-template-columns:1fr}.adventure-panel{grid-template-columns:1fr}.friends-art{min-height:220px}
+      .flow-row{grid-template-columns:repeat(2,1fr)}.embed-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:430px){.brand{font-size:1rem}.music-btn{font-size:.78rem;padding:9px}.hero-copy p{font-size:1rem}.section{padding-top:58px}.flow-row{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop>
+    <!-- MUSIC SLOT: Upload an MP3 to assets/background-music.mp3, then uncomment the line below. -->
+    <!-- <source src="assets/background-music.mp3" type="audio/mpeg"> -->
+  </audio>
+
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="#home"><span class="brand-mark">🌈</span> Feelings Adventure</a>
+      <div class="navlinks" id="navLinks">
+        <a href="#home">Home</a><a href="#adventure">Introduction</a><a href="#learning">Learning Notes</a>
+        <a href="#drilling">Drilling</a><a href="#games">Games</a><a href="#treasure">Quiz & Results</a>
+      </div>
+      <div class="nav-actions">
+        <button class="music-btn" id="musicToggle" onclick="toggleMusic()">♫ Music: OFF</button>
+        <button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('show')" aria-label="Open menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-card">
+        <div class="hero-copy">
+          <span class="eyebrow">✨ YOUR MAGICAL LEARNING JOURNEY</span>
+          <h1>Feelings <span>Adventure!</span></h1>
+          <p>Welcome, little explorer! Let's discover feelings, learn new words and complete magical missions together.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#adventure">🚀 Start Adventure</a>
+            <button class="btn btn-secondary" onclick="openBuddy()">🤖 Meet AI Buddy</button>
+          </div>
+          <div class="music-hint">Explore. Discover. Express. ⭐</div>
+        </div>
+        <div class="hero-art" role="img" aria-label="A magical rainbow castle and colourful garden">
+          <span class="floating-star star-a">⭐</span><span class="floating-star star-b">💖</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="adventure">
+      <div class="section-heading"><div class="kicker">01 · Set Induction</div><h2>The Adventure Begins</h2>
+        <p>Watch the introduction and discover how our little explorers feel in different situations.</p></div>
+      <div class="adventure-panel">
+        <div class="friends-art" role="img" aria-label="The Emotion Explorers team"></div>
+        <div class="adventure-text"><span class="pill">THE MYSTERY OF EMOTION ISLAND</span>
+          <h3>Can you guess the feeling?</h3>
+          <p>Look at the character's face and think about what might have happened. Is the character happy, sad, angry or scared?</p>
+          <p><b>Teacher's note:</b> Introduce the lesson objectives after pupils watch the video or explore the visual notes.</p>
+          <a class="btn btn-primary" href="#video-slot">▶ Watch Introduction</a>
+        </div>
+      </div>
+      <div class="content-card" id="video-slot">
+        <h3>🎬 Our Adventure Video</h3><p>Insert your YouTube video or other introduction video below.</p>
+        <div class="embed-placeholder" style="min-height:260px">
+          <div>📺 VIDEO EMBED AREA<code>Replace the iframe src with your YouTube Embed URL.</code></div>
+        </div>
+        <!-- VIDEO EMBED SLOT: Replace the placeholder above with:
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID"
+          title="Feelings Adventure Introduction" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        -->
+      </div>
+    </section>
+
+    <section class="section" id="learning">
+      <div class="section-heading"><div class="kicker">02 · Guided Learning</div><h2>Choose Your Learning Island</h2>
+        <p>Choose your school year. Each island has learning notes and vocabulary prepared for your level.</p></div>
+      <div class="year-grid">
+        <article class="year-card y1"><div class="year-icon">🌼</div><h3>Year 1</h3><p><b>Feelings Explorer</b><br>Recognising feelings through pictures, simple words and pronunciation audio.</p><span class="pill">Beginner</span><span class="pill">4 key words</span><a class="mini-link" href="#year-learning" onclick="selectYear('y1')">Explore Year 1 →</a></article>
+        <article class="year-card y2"><div class="year-icon">🦋</div><h3>Year 2</h3><p><b>Sentence Explorer</b><br>Describing feelings and using adjectives in simple sentences.</p><span class="pill">Developing</span><span class="pill">6 key words</span><a class="mini-link" href="#year-learning" onclick="selectYear('y2')">Explore Year 2 →</a></article>
+        <article class="year-card y3"><div class="year-icon">👑</div><h3>Year 3</h3><p><b>Emotion Master</b><br>Explaining feelings and giving simple reasons using “because”.</p><span class="pill">Master</span><span class="pill">6 key words</span><a class="mini-link" href="#year-learning" onclick="selectYear('y3')">Explore Year 3 →</a></article>
+      </div>
+
+      <div class="content-card" id="year-learning">
+        <div class="section-heading"><div class="kicker">Learning Materials</div><h2>Explore Your Notes</h2><p>Switch between the learning islands to view the vocabulary and notes.</p></div>
+        <div class="year-tabs">
+          <button class="tab active" data-year="y1" onclick="selectYear('y1')">🌼 Year 1</button>
+          <button class="tab" data-year="y2" onclick="selectYear('y2')">🦋 Year 2</button>
+          <button class="tab" data-year="y3" onclick="selectYear('y3')">👑 Year 3</button>
+        </div>
+        <div class="learning-panel active" id="panel-y1"><h3>🌼 Year 1 – Feelings Explorer</h3><p><b>Learning focus:</b> Recognising Feelings</p><div class="vocab-list"><span class="vocab">😊 happy</span><span class="vocab">😢 sad</span><span class="vocab">😠 angry</span><span class="vocab">😨 scared</span></div><p>Look at each facial expression, say the word aloud and listen to its pronunciation.</p></div>
+        <div class="learning-panel" id="panel-y2"><h3>🦋 Year 2 – Sentence Explorer</h3><p><b>Learning focus:</b> Describing Feelings</p><div class="vocab-list"><span class="vocab">😊 happy</span><span class="vocab">😢 sad</span><span class="vocab">😠 angry</span><span class="vocab">😨 scared</span><span class="vocab">🤩 excited</span><span class="vocab">😴 tired</span></div><p>Example sentences: “I am happy.” and “She is sad.”</p></div>
+        <div class="learning-panel" id="panel-y3"><h3>👑 Year 3 – Emotion Master</h3><p><b>Learning focus:</b> Explaining Feelings</p><div class="vocab-list"><span class="vocab">🤩 excited</span><span class="vocab">😟 worried</span><span class="vocab">😬 nervous</span><span class="vocab">😲 surprised</span><span class="vocab">😕 confused</span><span class="vocab">😞 disappointed</span></div><p>Example sentence: “I am excited because it is my birthday.”</p></div>
+        <div class="embed-box" style="margin-top:18px"><h4>📖 Digital Notes / Audio / Extra Materials</h4><div class="embed-placeholder">INSERT YOUR NOTES, SLIDES, PDF OR AUDIO HERE<code>Paste your Google Slides, Genially or other embed code in this box.</code></div>
+          <!-- NOTES EMBED SLOT: Paste your notes embed code here. -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ai-guide">
+      <div class="section-heading"><div class="kicker">Meet Your Adventure Guide</div><h2>AI Buddy Is Here to Help!</h2><p>Ask questions about feelings adjectives, meanings and simple sentences.</p></div>
+      <div class="treasure"><div class="big">🤖✨</div><h3 style="font-family:'Baloo 2';font-size:1.8rem;color:#493887">Let's Meet Emotion Bot!</h3><p>“Hello, explorer! I can help you learn new feelings words. Ready to begin?”</p><button class="btn btn-primary" onclick="openBuddy()">Chat with AI Buddy</button></div>
+    </section>
+
+    <section class="section" id="drilling">
+      <div class="section-heading"><div class="kicker">03 · Reinforcement</div><h2>Train Your Emotion Skills</h2><p>Practise what you have learned with activities prepared for your school year.</p></div>
+      <div class="year-tabs">
+        <button class="tab active" data-drill="d1" onclick="showDrill('d1')">Year 1</button>
+        <button class="tab" data-drill="d2" onclick="showDrill('d2')">Year 2</button>
+        <button class="tab" data-drill="d3" onclick="showDrill('d3')">Year 3</button>
+      </div>
+      <div class="learning-panel active" id="d1"><div class="embed-grid">
+        <div class="embed-box"><h4>🧩 Match the Feelings</h4><div class="embed-placeholder">INSERT YEAR 1 DRILLING GAME / QUIZ EMBED</div><!-- YEAR 1 DRILLING EMBED SLOT A --></div>
+        <div class="embed-box"><h4>🔊 Listen and Repeat</h4><div class="embed-placeholder">INSERT PRONUNCIATION AUDIO / ACTIVITY</div><!-- YEAR 1 DRILLING EMBED SLOT B --></div>
+      </div></div>
+      <div class="learning-panel" id="d2"><div class="embed-grid">
+        <div class="embed-box"><h4>✏️ Complete the Sentence</h4><div class="embed-placeholder">INSERT YEAR 2 SENTENCE QUIZ EMBED</div><!-- YEAR 2 DRILLING EMBED SLOT A --></div>
+        <div class="embed-box"><h4>🔤 Word Scramble</h4><div class="embed-placeholder">INSERT YEAR 2 WORD SCRAMBLE EMBED</div><!-- YEAR 2 DRILLING EMBED SLOT B --></div>
+      </div></div>
+      <div class="learning-panel" id="d3"><div class="embed-grid">
+        <div class="embed-box"><h4>🔍 Choose the Correct Emotion</h4><div class="embed-placeholder">INSERT YEAR 3 SITUATION QUIZ EMBED</div><!-- YEAR 3 DRILLING EMBED SLOT A --></div>
+        <div class="embed-box"><h4>💭 Complete the Sentence with Because</h4><div class="embed-placeholder">INSERT YEAR 3 SENTENCE ACTIVITY EMBED</div><!-- YEAR 3 DRILLING EMBED SLOT B --></div>
+      </div></div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="section-heading"><div class="kicker">04 · Game-based Learning</div><h2>The Emotion Quest</h2><p>Complete the missions, collect stars and become an Emotion Explorer!</p></div>
+      <div class="year-grid">
+        <article class="year-card y1"><div class="year-icon">🧸</div><h3>Beginner Explorer</h3><p>Year 1 missions: Match the Feelings, Guess the Emotion and Find the Correct Picture.</p><span class="pill">Year 1 Games</span><div class="embed-placeholder" style="margin-top:14px">INSERT YEAR 1 GAME EMBED<code>Genially / Wordwall / ZEP / other game</code></div><!-- YEAR 1 GAME EMBED SLOT --></article>
+        <article class="year-card y2"><div class="year-icon">🦄</div><h3>Junior Explorer</h3><p>Year 2 missions: Complete the Sentence, Word Scramble and Choose the Correct Adjective.</p><span class="pill">Year 2 Games</span><div class="embed-placeholder" style="margin-top:14px">INSERT YEAR 2 GAME EMBED<code>Genially / Wordwall / ZEP / other game</code></div><!-- YEAR 2 GAME EMBED SLOT --></article>
+        <article class="year-card y3"><div class="year-icon">🏆</div><h3>Master Explorer</h3><p>Year 3 missions: Solve the Emotion Mystery, Complete the Story and Emotion Challenge.</p><span class="pill">Year 3 Games</span><div class="embed-placeholder" style="margin-top:14px">INSERT YEAR 3 GAME EMBED<code>Genially / Wordwall / ZEP / other game</code></div><!-- YEAR 3 GAME EMBED SLOT --></article>
+      </div>
+    </section>
+
+    <section class="section" id="treasure">
+      <div class="section-heading"><div class="kicker">05 · Assessment and Feedback</div><h2>The Treasure of Knowledge</h2><p>Check your answers, see your score and celebrate your progress!</p></div>
+      <div class="treasure">
+        <div class="big">🎁💎</div><h3 style="font-family:'Baloo 2';font-size:1.8rem;color:#493887">Unlock Your Treasure!</h3>
+        <p>Insert your answer-checking website or quiz platform below. Pupils can receive marks, feedback and rewards after completing the activities.</p>
+        <div class="embed-placeholder" style="background:#ffffffc9;min-height:230px">INSERT ANSWER CHECKING WEBSITE / QUIZ EMBED HERE<code>Paste the iframe or embed code supplied by your quiz platform.</code></div>
+        <!-- ANSWER CHECKING EMBED SLOT:
+        <iframe src="PASTE_YOUR_QUIZ_OR_ANSWER_CHECKING_EMBED_URL_HERE"
+          width="100%" height="520" style="border:0;border-radius:16px"
+          allowfullscreen loading="lazy"></iframe>
+        -->
+        <p><span class="pill">⭐ Score</span><span class="pill">🏅 Badge</span><span class="pill">💌 Feedback</span></p>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="section-heading"><div class="kicker">Our Learning Journey</div><h2>Five Steps to Become an Emotion Explorer</h2></div>
+      <div class="flow-row">
+        <div class="flow-step"><span>🎬</span><b>1. Introduction</b><small>Meet the emotion characters</small></div>
+        <div class="flow-step"><span>🤖</span><b>2. AI Buddy</b><small>Learn with your guide</small></div>
+        <div class="flow-step"><span>✏️</span><b>3. Drilling</b><small>Practise your skills</small></div>
+        <div class="flow-step"><span>🎮</span><b>4. Games</b><small>Complete fun missions</small></div>
+        <div class="flow-step"><span>💎</span><b>5. Treasure</b><small>Check and celebrate</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div style="font-size:2rem">🌈🏰⭐</div><h2 style="color:white">You Are an Emotion Explorer!</h2>
+    <p>Explore. Discover. Express.</p><p>Feelings Adventure: The Emotion Explorers</p>
+  </footer>
+
+  <button class="buddy-launch" onclick="openBuddy()">🤖 Ask AI Buddy</button>
+  <aside class="buddy-window" id="buddyWindow" aria-label="AI Buddy chat">
+    <div class="buddy-head"><div><strong>🤖 Emotion Bot</strong><div style="font-size:.78rem;opacity:.9">Your learning adventure guide</div></div><button class="close-buddy" onclick="closeBuddy()" aria-label="Close chat">×</button></div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="bubble bot">Hello, explorer! 🌟 I'm Emotion Bot. Ask me about feelings words, their meanings or simple sentences!</div>
+    </div>
+    <form class="chat-form" onsubmit="sendMessage(event)"><input id="chatInput" type="text" placeholder="Ask me something..." aria-label="Your message"><button type="submit">➤</button></form>
+    <div class="note">Demo helper until your AI service is connected.</div>
+    <!-- AI INTEGRATION SLOT:
+      Paste your Botpress Webchat integration code here, or place its official
+      embed script in this area. Follow the latest embed instructions from your
+      Botpress workspace. The popup above is the visual chat panel; a real AI
+      connection requires your Botpress bot's integration code.
+    -->
+  </aside>
+
+  <script>
+    function selectYear(year){
+      document.querySelectorAll('[data-year]').forEach(b=>b.classList.toggle('active',b.dataset.year===year));
+      document.querySelectorAll('.learning-panel[id^="panel-"]').forEach(p=>p.classList.toggle('active',p.id==='panel-'+year));
+    }
+    function showDrill(id){
+      document.querySelectorAll('[data-drill]').forEach(b=>b.classList.toggle('active',b.dataset.drill===id));
+      ['d1','d2','d3'].forEach(x=>document.getElementById(x).classList.toggle('active',x===id));
+    }
+    function openBuddy(){document.getElementById('buddyWindow').classList.add('open');}
+    function closeBuddy(){document.getElementById('buddyWindow').classList.remove('open');}
+    function addBubble(text,who){const div=document.createElement('div');div.className='bubble '+who;div.textContent=text;const area=document.getElementById('chatMessages');area.appendChild(div);area.scrollTop=area.scrollHeight;}
+    function sendMessage(e){
+      e.preventDefault();const input=document.getElementById('chatInput');const q=input.value.trim();if(!q)return;
+      addBubble(q,'user');input.value='';
+      const t=q.toLowerCase();let answer="Great question, explorer! A feeling is an emotion that tells us how someone feels. Can you give me an example?";
+      if(t.includes('happy'))answer="Happy means feeling good or pleased. Example: I am happy because I am playing with my friends. 😊";
+      else if(t.includes('sad'))answer="Sad means feeling unhappy. Example: She is sad because she lost her toy. 😢";
+      else if(t.includes('angry'))answer="Angry means feeling mad or upset. Example: He is angry because someone took his pencil. 😠";
+      else if(t.includes('scared'))answer="Scared means feeling afraid. Example: I am scared of the dark. 😨";
+      else if(t.includes('excited'))answer="Excited means feeling very happy about something that is going to happen. Example: I am excited because it is my birthday! 🤩";
+      else if(t.includes('because'))answer="We use 'because' to give a reason. Example: I am tired because I played football. ⭐";
+      else if(t.includes('hello')||t.includes('hi'))answer="Hello, explorer! 🌈 Which feeling word would you like to learn today?";
+      setTimeout(()=>addBubble(answer,'bot'),350);
+    }
+    async function toggleMusic(){
+      const audio=document.getElementById('bgMusic');const btn=document.getElementById('musicToggle');
+      if(!audio.querySelector('source')){alert('Add your music file first: upload an MP3 to assets/background-music.mp3 and uncomment the source line in index.html.');return;}
+      if(audio.paused){try{await audio.play();btn.textContent='♫ Music: ON';}catch(e){alert('Please check that your music file is uploaded correctly.');}}
+      else{audio.pause();btn.textContent='♫ Music: OFF';}
+    }
+  </script>
+</body>
+</html>
